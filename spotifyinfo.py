@@ -1,7 +1,7 @@
 import os
-
-import spotipy
+import time
 from spotipy.oauth2 import SpotifyOAuth
+import spotipy
 from dotenv import load_dotenv
 
 class spotify:
