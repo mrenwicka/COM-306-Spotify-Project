@@ -8,6 +8,15 @@
     <title>hi</title>
 </head>
 <body>
+      <div id="Dashboard">Welcome, Miles!</div>
+
+  {% if song_info %}
+    <div class="border">
+      <p><strong>Now Playing:</strong> {{ song_info.song }} by {{ song_info.artist }}</p>
+      <p><strong>Album:</strong> {{ song_info.album }}</p>
+      <img src="{{ song_info.cover_url }}" alt="Album Cover" style="width:200px;">
+    </div>
+    
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-secondary ps-2">
             <a class="navbar-brand">Spotify App</a>
