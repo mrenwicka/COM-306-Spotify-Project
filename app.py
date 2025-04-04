@@ -56,6 +56,20 @@ def register():
     # If it's a GET request, render the login page
     return render_template('register.html')
 
+
+
+@app.route('/dashboard')
+def dashboard():
+    spotify = SpotifyClient()
+    song_info = spotify.get_current_song_info()
+
+    if song_info == "same":
+        song_info = None
+
+    return render_template('index.html', song_info=song_info)
+
+
+
 @app.route('/weather')
 def weather():
     weather = weatherplaylists()
