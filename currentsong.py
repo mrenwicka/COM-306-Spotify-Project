@@ -1,4 +1,7 @@
-   self.last_track_id = None
+import time
+import os
+
+ self.last_track_id = None
 
     def get_current_song_info(self):
         current = self.sp.current_playback()
