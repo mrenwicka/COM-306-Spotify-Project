@@ -2,6 +2,7 @@ import os
 
 from flask import Flask, render_template, redirect, request, session, url_for
 from weathertoplaylist import weatherplaylists
+from spotifyinfo import SpotifyClient
 
 app = Flask(__name__)
 
