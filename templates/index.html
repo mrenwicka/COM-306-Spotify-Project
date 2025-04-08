@@ -7,19 +7,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <title>hi</title>
 </head>
- <div id="Dashboard">Welcome, Miles!</div>
-
-  {% if song_info %}
-    <div class="border">
-      <p><strong>Now Playing:</strong> {{ song_info.song }} by {{ song_info.artist }}</p>
-      <p><strong>Album:</strong> {{ song_info.album }}</p>
-      <img src="{{ song_info.cover_url }}" alt="Album Cover" style="width:200px;">
-    </div>
-  {% else %}
-    <div class="border">
-      <p>No song is currently playing.</p>
-    </div>
-  {% endif %}
     
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-secondary ps-2">
@@ -32,6 +19,22 @@
             <img src="{{ url_for('static', filename='placeholder.jpg') }}" alt="profile picture" class="image" width="110" height="110"> 
         </nav> 
     </header>
+
+    <div id="Dashboard">Welcome, Miles!</div>
+
+    {% if song_info %}
+      <div class="border">
+        <p><strong>Now Playing:</strong> {{ song_info.song }} by {{ song_info.artist }}</p>
+        <p><strong>Album:</strong> {{ song_info.album }}</p>
+        <img src="{{ song_info.cover_url }}" alt="Album Cover" style="width:200px;">
+      </div>
+    {% else %}
+      <div class="border">
+        <p>No song is currently playing.</p>
+      </div>
+    {% endif %}
+
+    
     <div class="jumbotron mt-3 container rounded">
         <h1 class="display-3 text-center">Music for Current Weather</h1>
     </div>

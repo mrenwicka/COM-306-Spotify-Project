@@ -2,7 +2,7 @@ import os
 
 from flask import Flask, render_template, redirect, request, session, url_for
 from weathertoplaylist import weatherplaylists
-from spotifyinfo import SpotifyClient
+from spotifyinfo import spotify
 
 app = Flask(__name__)
 
@@ -61,7 +61,7 @@ def register():
 
 @app.route('/dashboard')
 def dashboard():
-    spotify = SpotifyClient()
+    spotify = spotify()
     song_info = spotify.get_current_song_info()
 
     if song_info == "same":
