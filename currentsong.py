@@ -1,9 +1,12 @@
 import time
-import os
-from spotifyinfo import SpotifyClient
+from spotipy import Spotify
+from spotipy.oauth2 import SpotifyOAuth
+from spotifyinfo import spotify
 
-
- self.last_track_id = None
+class SpotifyTrackInfo:
+    def __init__(self):
+        self.sp = spotify().get_client()
+        self.last_track_id = None
 
     def get_current_song_info(self):
         current = self.sp.current_playback()
@@ -26,7 +29,10 @@ from spotifyinfo import SpotifyClient
             }
         return "same"
 
-
 if __name__ == "__main__":
-    spotify = SpotifyClient()
-
+    spotify_info = SpotifyTrackInfo()
+    while True:
+        song_info = spotify_info.get_current_song_info()
+        if song_info:
+            print(song_info)
+        time.sleep(5)  # Delay to avoid too many API requests
