@@ -2,6 +2,7 @@ import os
 
 from flask import Flask, render_template, redirect, request, session, url_for
 from weathertoplaylist import weatherplaylists
+from spotifyinfo import spotify
 
 app = Flask(__name__)
 
@@ -58,33 +59,21 @@ def register():
 
 
 
-@app.route('/dashboard')
-def dashboard():
-    spotify = spotify()
-    song_info = spotify.get_current_song_info()
-
-    if song_info == "same":
-        song_info = None
-
-    return render_template('index.html', song_info=song_info)
-
-
-
 @app.route('/weather')
 def weather():
     weather = weatherplaylists()
+    spotify = SpotifyTrackInfo()
+
+    song_info = spotify.get_current_song_info()
+    if song_info == "same":
+        song_info = None
+
     weather_code = weather.get_weather()
     playlist_id = weather.get_weather_playlist(weather_code)
     playlist_url = weather.get_playlist_url(playlist_id)
 
     return render_template('index.html', playlist_url=playlist_url)
 
-@app.route('/monthly')
-def monthly():
-    monthly_playlist_url = monthly_playlist()
-
-    return render_tmeplate('index.html', monthly_playlist_url = monthly_playlist_url)
-     
 
 if __name__ == '__main__':
     app.run(debug=True)
