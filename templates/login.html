@@ -15,9 +15,15 @@
 
         <input class="textbox" type="text" name="username" placeholder="Enter Username" required>
         <input class="textbox" type="password" name="password" placeholder="Enter Password" required>
-
         <button class="btn" type="submit">Login</button>
+
+        <div>
+            <a href="/register" class="btn">Don't have an Account?</a>
+        </div>
     </form>
+    {% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
 </div>
 
 </body>
