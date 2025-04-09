@@ -1,5 +1,6 @@
 import os
 
+from topsongs import SpotifyTopSongs
 from flask import Flask, render_template, redirect, request, session, url_for
 from weathertoplaylist import weatherplaylists
 from spotifyinfo import spotify
@@ -60,7 +61,7 @@ def register():
 
 @app.route('/topsongs')
 def topsongs():
-    spotify = SpotifyTrackInfo()
+    spotify = SpotifyTopSongs()
     top_tracks = spotify.get_top_tracks(limit=3)
 
     return render_template('topsongs.html', top_tracks=top_tracks)
