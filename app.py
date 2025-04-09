@@ -58,7 +58,12 @@ def register():
     # If it's a GET request, render the login page
     return render_template('register.html')
 
+@app.route('/topsongs')
+def topsongs():
+    spotify = SpotifyTrackInfo()
+    top_tracks = spotify.get_top_tracks(limit=3)
 
+    return render_template('topsongs.html', top_tracks=top_tracks)
 
 @app.route('/weather')
 def weather():
