@@ -1,12 +1,19 @@
 import time
-from spotipy import Spotify
-from spotipy.oauth2 import SpotifyOAuth
+import spotipy
 from spotifyinfo import spotify
 
 class SpotifyTrackInfo:
     def __init__(self):
         self.sp = spotify().get_client()
         self.last_track_id = None
+
+    def authenticate(self):
+        # Check if token is cached
+        token_info = self.sp_oauth.get_cached_token()
+        if token_info:
+            self.sp = spotipy.Spotify(auth=token_info['access_token'])
+            return None
+        return self.sp_oauth.get_authorize_url()
 
     def get_current_song_info(self):
         current = self.sp.current_playback()
