@@ -2,6 +2,7 @@ from topsongs import SpotifyTopSongs
 from flask import Flask, render_template, redirect, request, session, url_for
 from weathertoplaylist import weatherplaylists
 from currentsong import SpotifyTrackInfo
+from monthlyplaylist import monthlyplaylist
 
 app = Flask(__name__)
 
@@ -28,9 +29,12 @@ def weather():
 
     weather_code = weather.get_weather()
     playlist_id = weather.get_weather_playlist(weather_code)
-    playlist_url = weather.get_playlist_url(playlist_id)
+    weather_playlist_url = weather.get_playlist_url(playlist_id)
 
-    return render_template('index.html', playlist_url=playlist_url, song_info=song_info)
+    monthly_playlist_url = monthlyplaylist.monthly_playlist()
+    
+
+    return render_template('index.html', weather_playlist_url=weather_playlist_url, song_info=song_info, monthly_playlist_url=monthly_playlist_url)
 
 
 if __name__ == '__main__':

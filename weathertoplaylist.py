@@ -49,3 +49,4 @@ if __name__ == "__main__":
     
     print(playlist_id)
     print(playlist_url)
+    print(weather_code)
