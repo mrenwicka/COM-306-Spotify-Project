@@ -31,7 +31,9 @@ def weather():
     playlist_id = weather.get_weather_playlist(weather_code)
     weather_playlist_url = weather.get_playlist_url(playlist_id)
 
-    monthly_playlist_url = monthlyplaylist.monthly_playlist()
+    month_client = monthlyplaylist()
+    month = month_client.current_month()
+    monthly_playlist_url = month_client.monthly_playlist(month)
     
 
     return render_template('index.html', weather_playlist_url=weather_playlist_url, song_info=song_info, monthly_playlist_url=monthly_playlist_url)

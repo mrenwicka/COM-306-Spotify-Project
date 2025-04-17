@@ -22,14 +22,9 @@ class monthlyplaylist:
         'December': '37i9dQZF1E8OSswGcqKz7M',
         }
 
-        for month, id in playlist_ids.items():
-            if currentmonth in month:
-                return id
+        monthly_playlist_url = playlist_ids.get(currentmonth)
 
-
-        # monthly_playlist_uri = MONTHLY_PLAYLISTS.get(current_month, None)
-
-        # return f"https://open.spotify.com/embed/playlist/{monthly_playlist_uri}"
+        return f"https://open.spotify.com/embed/playlist/{monthly_playlist_url}"
 
 if __name__ == "__main__":
     month_client = monthlyplaylist()
