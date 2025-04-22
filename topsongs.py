@@ -24,10 +24,11 @@ class SpotifyTopSongs:
         top_tracks = []
         for item in results['items']:
             track_info = {
+                "id": item['id'],
                 "name": item['name'],
                 "artist": item['artists'][0]['name'],
-                "url": item['external_urls']['spotify'],
                 "album": item['album']['name'],
+                "url": item['external_urls']['spotify'],
                 "image": item['album']['images'][0]['url']
             }
             top_tracks.append(track_info)
