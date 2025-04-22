@@ -34,6 +34,25 @@
       </div>
     {% endif %}
 
+    <div class="container mt-5">
+      <h2 class="text-center mb-4">Your Top Songs</h2>
+      <div class="row justify-content-center">
+          {% for track in top_tracks %}
+          <div class="col-md-4 mb-4">
+              <div class="card h-100">
+                  <img src="{{ track.image }}" class="card-img-top" alt="Album Cover">
+                  <div class="card-body">
+                      <h5 class="card-title">{{ track.name }}</h5>
+                      <p class="card-text">by {{ track.artist }}</p>
+                      <p class="card-text"><em>{{ track.album }}</em></p>
+                      <a href="{{ track.url }}" target="_blank" class="btn btn-success">Listen on Spotify</a>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+
     
     <div class="jumbotron mt-3 container rounded">
         <h1 class="display-3 text-center">Music for Current Weather</h1>
