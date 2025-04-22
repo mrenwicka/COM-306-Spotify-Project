@@ -13,9 +13,9 @@ def home():
 
 @app.route('/topsongs')
 def topsongs():
-    spotify = SpotifyTopSongs()
-    top_tracks = spotify.get_top_tracks(limit=3)
-
+    spotify = SpotifyTopSongs(limit=3)
+    top_tracks = spotify.get_top_songs()
+    print("DEBUG: top_tracks =", top_tracks)
     return render_template('topsongs.html', top_tracks=top_tracks)
 
 @app.route('/weather')
@@ -34,9 +34,13 @@ def weather():
     month_client = monthlyplaylist()
     month = month_client.current_month()
     monthly_playlist_url = month_client.monthly_playlist(month)
+
+    from topsongs import SpotifyTopSongs
+    top_songs_client = SpotifyTopSongs(limit=3)
+    top_tracks = top_songs_client.get_top_songs()
     
 
-    return render_template('index.html', weather_playlist_url=weather_playlist_url, song_info=song_info, monthly_playlist_url=monthly_playlist_url)
+    return render_template('index.html', weather_playlist_url=weather_playlist_url, song_info=song_info, monthly_playlist_url=monthly_playlist_url, top_tracks=top_tracks)
 
 
 if __name__ == '__main__':
