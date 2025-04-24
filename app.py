@@ -11,13 +11,6 @@ def home():
     # Redirect to the login page
     return redirect(url_for('weather'))
 
-@app.route('/topsongs')
-def topsongs():
-    spotify = SpotifyTopSongs(limit=3)
-    top_tracks = spotify.get_top_songs()
-    print("DEBUG: top_tracks =", top_tracks)
-    return render_template('topsongs.html', top_tracks=top_tracks)
-
 @app.route('/weather')
 def weather():
     weather = weatherplaylists()
@@ -35,9 +28,8 @@ def weather():
     month = month_client.current_month()
     monthly_playlist_url = month_client.monthly_playlist(month)
 
-    from topsongs import SpotifyTopSongs
-    top_songs_client = SpotifyTopSongs(limit=3)
-    top_tracks = top_songs_client.get_top_songs()
+    top_songs = SpotifyTopSongs(limit=3)
+    top_tracks = top_songs.get_top_songs()
     
 
     return render_template('index.html', weather_playlist_url=weather_playlist_url, song_info=song_info, monthly_playlist_url=monthly_playlist_url, top_tracks=top_tracks)
