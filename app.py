@@ -3,6 +3,8 @@ from flask import Flask, render_template, redirect, request, session, url_for
 from weathertoplaylist import weatherplaylists
 from currentsong import SpotifyTrackInfo
 from monthlyplaylist import monthlyplaylist
+from topsongs import SpotifyTopSongs
+from userinfo import userinfo
 
 app = Flask(__name__)
 
@@ -35,12 +37,19 @@ def weather():
     month = month_client.current_month()
     monthly_playlist_url = month_client.monthly_playlist(month)
 
-    from topsongs import SpotifyTopSongs
     top_songs_client = SpotifyTopSongs(limit=3)
     top_tracks = top_songs_client.get_top_songs()
+
+    user_client = userinfo()
+    user_id = user_client.get_user_id()
+    username = user_client.get_username(user_id)
+    profile_pic = user_client.get_profile_pic(user_id)
     
 
-    return render_template('index.html', weather_playlist_url=weather_playlist_url, song_info=song_info, monthly_playlist_url=monthly_playlist_url, top_tracks=top_tracks)
+    return render_template('index.html', weather_playlist_url=weather_playlist_url, song_info=song_info, 
+                           monthly_playlist_url=monthly_playlist_url, top_tracks=top_tracks, username = username,
+                           profile_pic = profile_pic)
+
 
 
 if __name__ == '__main__':
