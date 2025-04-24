@@ -3,7 +3,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
 class SpotifyTopSongs:
-    def __init__(self, time_range="medium_term", limit=10, offset=0):
+    def __init__(self, time_range="short_term", limit=10, offset=0):
         self.time_range = time_range
         self.limit = limit
         self.offset = offset
