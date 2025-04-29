@@ -5,6 +5,7 @@ from currentsong import SpotifyTrackInfo
 from monthlyplaylist import monthlyplaylist
 from topsongs import SpotifyTopSongs
 from userinfo import userinfo
+from genrepie import generate_genre_pie_chart
 
 app = Flask(__name__)
 
