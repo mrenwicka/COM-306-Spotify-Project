@@ -46,9 +46,17 @@ def weather():
     profile_pic = user_client.get_profile_pic(user_id)
     
 
-    return render_template('index.html', weather_playlist_url=weather_playlist_url, song_info=song_info, 
-                           monthly_playlist_url=monthly_playlist_url, top_tracks=top_tracks, username = username,
-                           profile_pic = profile_pic)
+    chart_path = generate_genre_pie_chart()
+    
+
+    return render_template('index.html',
+                           weather_playlist_url=weather_playlist_url,
+                           song_info=song_info,
+                           monthly_playlist_url=monthly_playlist_url,
+                           top_tracks=top_tracks,
+                           username=username,
+                           profile_pic=profile_pic,
+                           genre_chart_url=chart_path)
 
 
 
