@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<body class="bg-dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,49 +10,61 @@
 </head>
     
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-secondary ps-2">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ps-2">
             <a class="navbar-brand">Spotify App</a>
             <div class="collapse navbar-collapse">
                 <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="weather">home</a>
                 </div>
             </div>
-            <img src="{{ profile_pic }}" alt="profile picture" class="image" width="110" height="110"> 
+            <img src="{{ profile_pic }}" alt="profile picture" class="image rounded-circle me-2" width="50" height="50"> 
         </nav> 
     </header>
 
     <div id="Dashboard">Welcome, {{ username }}</div>
 
-    {% if song_info %}
-      <div class="border">
-        <p><strong>Now Playing:</strong> {{ song_info.song }} by {{ song_info.artist }}</p>
-        <p><strong>Album:</strong> {{ song_info.album }}</p>
-        <img src="{{ song_info.cover_url }}" alt="Album Cover" style="width:200px;">
-      </div>
-    {% else %}
-      <div class="border">
-        <p>No song is currently playing.</p>
-      </div>
-    {% endif %}
-    
-    <div class="container mt-5">
-        <h2 class="text-center mb-4">Your Top Songs</h2>
-        <div class="d-flex justify-content-center flex-wrap gap-4">
-            {% for track in top_tracks %}
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/{{ track.id }}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            {% endfor %}
+        <div class = "d-flex justify-content-center">
+            {% if song_info %}
+            <div>
+                <div class="d-flex justify-content-center mb-2">
+                <img class = "rounded" src="{{ song_info.cover_url }}" alt="Album Cover" width = "200">
+                </div>
+                <h6 class="text-light text-center">You're Playing: {{ song_info.song }} by {{ song_info.artist }}</h3>
+                <h6 class="text-light text-center">Album:</strong> {{ song_info.album }}</h3>
+            </div>
+            {% else %}
+            <div>
+                <h5 class="text-light">You're not listening to anything right now.</h5>
+            </div>
+            {% endif %}
         </div>
-    </div>
 
-    <div class="jumbotron mt-3 container rounded">
-        <h1 class="display-3 text-center">Music for Current Weather</h1>
-    </div>
+    <hr class="text-light"></hr>
 
-    <div class="d-flex justify-content-center">
-        <iframe src="{{ weather_playlist_url }}" width="500" height="500" frameborder="0"></iframe>
-    </div>
-    <div class="d-flex justify-content-center">
-        <iframe src="{{ monthly_playlist_url }}" width="500" height="500" frameborder="0"></iframe>
+        <div>
+            <div class = "d-flex justify-content-center">
+                <h2 class="text-light">Your Top Songs</h2>
+            </div>
+            <div class="d-flex justify-content-center flex-wrap gap-4">
+                {% for track in top_tracks %}
+                <iframe class = "mb-2" src="https://open.spotify.com/embed/track/{{ track.id }}" width="300" height="80"></iframe>
+                {% endfor %}
+            </div>
+        </div>
+
+    <hr class = "text-light"></hr>
+
+    <div class="container">
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <div class="text-center">
+                <h3 class = "text-light">Weather Playlist</h3>
+                <iframe src="{{ weather_playlist_url }}" width="500" height="500" frameborder="0"></iframe>
+            </div>
+            <div class="text-center">
+                <h3 class = "text-light">Monthly Playlist</h3>
+                <iframe src="{{ monthly_playlist_url }}" width="500" height="500" frameborder="0"></iframe>
+            </div>
+        </div>
     </div>
   
   
