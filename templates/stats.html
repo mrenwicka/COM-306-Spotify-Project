@@ -37,11 +37,23 @@
     <hr class = "text-light"></hr>
 
     <div class="container mt-3">
-        <h2 class="text-center text-light">Your Top Genres</h2>
+        <h2 class="text-center text-light">Your Top Genres & Artists</h2>
+        <div class="text-center mb-3">
+            <button class="btn btn-outline-light me-2" onclick="toggleChart('genre')">Show Genres</button>
+            <button class="btn btn-outline-light" onclick="toggleChart('artist')">Show Artists</button>
+        </div>
         <div class="d-flex justify-content-center">
-            <img src="{{ genre_chart_url }}" alt="Genre Pie Chart" class="img-fluid rounded shadow">
+            <img id="genreChart" src="{{ genre_chart_url }}" alt="Genre Pie Chart" class="img-fluid rounded shadow">
+            <img id="artistChart" src="{{ artist_chart_url }}" alt="Artist Pie Chart" class="img-fluid rounded shadow" style="display: none;">
         </div>
     </div>
+    
+    <script>
+        function toggleChart(type) {
+            document.getElementById('genreChart').style.display = type === 'genre' ? 'block' : 'none';
+            document.getElementById('artistChart').style.display = type === 'artist' ? 'block' : 'none';
+        }
+    </script>
     
 
 
