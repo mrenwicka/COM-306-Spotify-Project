@@ -14,8 +14,11 @@ class userinfo():
     
     def get_profile_pic(self, id):
         info = self.sp.user(id)
-        profile_pic = info.get('images')
-        return profile_pic[0]['url']
+        try:
+            profile_pic = info.get('images')
+            return profile_pic[0]['url']
+        except:
+            return None
 
 if __name__ == "__main__": 
     user_info = userinfo()
