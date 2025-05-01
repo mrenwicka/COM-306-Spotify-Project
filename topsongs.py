@@ -10,7 +10,7 @@ class SpotifyTopSongs:
         self.sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
             client_id="f8f3c96e665648f8823d13c6d2f40617",
             client_secret="f9a65795fb774d3ba5103499a4722901",
-            redirect_uri="http://localhost:8080/callback",
+            redirect_uri="http://127.0.0.1:8080/callback",
             scope="user-top-read"
         ))
 
