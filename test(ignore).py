@@ -11,7 +11,7 @@ load_dotenv()
 
 SPOTIFY_CLIENT_ID = os.getenv('CLIENT_ID')
 SPOTIFY_CLIENT_SECRET = os.getenv('CLIENT_SECRET')
-SPOTIFY_REDIRECT_URI = "http://localhost:8080/callback"
+SPOTIFY_REDIRECT_URI = "http://127.0.0.1:8080/callback"
 
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=SPOTIFY_CLIENT_ID,
 client_secret=SPOTIFY_CLIENT_SECRET,

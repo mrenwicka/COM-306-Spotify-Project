@@ -1,15 +1,38 @@
+import pathlib
 from topsongs import SpotifyTopSongs
 from flask import Flask, render_template, redirect, request, session, url_for
 from weathertoplaylist import weatherplaylists
 from currentsong import SpotifyTrackInfo
 from monthlyplaylist import monthlyplaylist
+from topsongs import SpotifyTopSongs
+from userinfo import userinfo
+from genrepie import generate_genre_pie_chart
 
 app = Flask(__name__)
+p = pathlib.Path(__file__)
 
 @app.route('/')
 def home():
+
     # Redirect to the login page
     return redirect(url_for('weather'))
+@app.route('/logout')
+def logout():
+    ##trying to figure out how to delete the cache
+    p = pathlib.Path("cache.txt")
+    p.unlink(missing_ok=True)
+    p = pathlib.Path("cache.sqlite")
+    p.unlink(missing_ok=True)
+
+    # Redirect to the login page
+    return redirect(url_for('weather'))
+
+@app.route('/topsongs')
+def topsongs():
+    spotify = SpotifyTopSongs(limit=3)
+    top_tracks = spotify.get_top_songs()
+    print("DEBUG: top_tracks =", top_tracks)
+    return render_template('topsongs.html', top_tracks=top_tracks)
 
 @app.route('/weather')
 def weather():
@@ -28,11 +51,27 @@ def weather():
     month = month_client.current_month()
     monthly_playlist_url = month_client.monthly_playlist(month)
 
-    top_songs = SpotifyTopSongs(limit=3)
-    top_tracks = top_songs.get_top_songs()
+    top_songs_client = SpotifyTopSongs(limit=3)
+    top_tracks = top_songs_client.get_top_songs()
+
+    user_client = userinfo()
+    user_id = user_client.get_user_id()
+    username = user_client.get_username(user_id)
+    profile_pic = user_client.get_profile_pic(user_id)
     
 
-    return render_template('index.html', weather_playlist_url=weather_playlist_url, song_info=song_info, monthly_playlist_url=monthly_playlist_url, top_tracks=top_tracks)
+    chart_path = generate_genre_pie_chart()
+    
+
+    return render_template('index.html',
+                           weather_playlist_url=weather_playlist_url,
+                           song_info=song_info,
+                           monthly_playlist_url=monthly_playlist_url,
+                           top_tracks=top_tracks,
+                           username=username,
+                           profile_pic=profile_pic,
+                           genre_chart_url=chart_path)
+
 
 
 if __name__ == '__main__':
