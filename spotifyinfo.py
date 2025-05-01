@@ -9,7 +9,7 @@ class spotify:
 
         self.client_id = os.getenv('CLIENT_ID')
         self.client_secret = os.getenv('CLIENT_SECRET')
-        self.redirect_uri = "http://localhost:8080/callback"
+        self.redirect_uri = "http://127.0.0.1:8080/callback"
 
         #Force re-authentication by setting the cache_path to None
         self.sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
