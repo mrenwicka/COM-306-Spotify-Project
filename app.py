@@ -5,14 +5,14 @@ from currentsong import SpotifyTrackInfo
 from monthlyplaylist import monthlyplaylist
 from topsongs import SpotifyTopSongs
 from userinfo import userinfo
-from genrepie import generate_genre_pie_chart
+from genrepie import generate_genre_pie_chart, generate_artist_pie_chart
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
     # Redirect to the login page
-    return redirect(url_for('home'))
+    return redirect(url_for('weather'))
 
 @app.route('/stats')
 def stats():
@@ -26,13 +26,15 @@ def stats():
     top_songs_client = SpotifyTopSongs(limit=3)
     top_tracks = top_songs_client.get_top_songs()
 
-    chart_path = generate_genre_pie_chart()
+    genre_chart_path = generate_genre_pie_chart()
+    artist_chart_path = generate_artist_pie_chart()
 
     return render_template('stats.html',
                            top_tracks=top_tracks,
                            username=username,
                            profile_pic=profile_pic,
-                           genre_chart_url=chart_path)
+                           genre_chart_url=genre_chart_path,
+                           artist_chart_url=artist_chart_path)
     
 
 @app.route('/home')
