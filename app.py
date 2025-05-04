@@ -1,5 +1,6 @@
 #app.py
 from topsongs import SpotifyTopSongs
+from spotifyinfo import spotify
 from flask import Flask, render_template, redirect, request, session, url_for
 from weathertoplaylist import weatherplaylists
 from currentsong import SpotifyTrackInfo
@@ -17,15 +18,20 @@ def home():
 
 @app.route('/stats')
 def stats():
-    spotify = SpotifyTrackInfo()
+    spotify_info = SpotifyTrackInfo()
 
     user_client = userinfo()
     user_id = user_client.get_user_id()
     username = user_client.get_username(user_id)
     profile_pic = user_client.get_profile_pic(user_id)
 
-    top_songs_client = SpotifyTopSongs(limit=3)
+    sp_client = spotify().get_client()
+    top_songs_client = SpotifyTopSongs(sp_client, limit=3)
     top_tracks = top_songs_client.get_top_songs()
+
+    personal_playlists = top_songs_client.your_playlists(max_count=2)
+    playlist_1 = personal_playlists[0] if len(personal_playlists) > 0 else None
+    playlist_2 = personal_playlists[1] if len(personal_playlists) > 1 else None
 
     genre_chart_path = generate_genre_pie_chart()
     artist_chart_path = generate_artist_pie_chart()
@@ -35,7 +41,9 @@ def stats():
                            username=username,
                            profile_pic=profile_pic,
                            genre_chart_url=genre_chart_path,
-                           artist_chart_url=artist_chart_path)
+                           artist_chart_url=artist_chart_path,
+                           playlist_1=playlist_1,
+                           playlist_2=playlist_2)
     
 
 @app.route('/home')
