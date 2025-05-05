@@ -32,25 +32,10 @@
             <iframe class = "mb-2" src="https://open.spotify.com/embed/track/{{ track.id }}" width="300" height="80"></iframe>
             {% endfor %}
         </div>
-        <div class="container mt-5">
-            <div class="d-flex justify-content-center gap-3 flex-wrap">
+
         
-                {% if playlist_1 %}
-                <div class="text-center">
-                    <h3 class="text-light">{{ playlist_1.name }}</h3>
-                    <iframe src="https://open.spotify.com/embed/playlist/{{ playlist_1.id }}" width="500" height="500" frameborder="0"></iframe>
-                </div>
-                {% endif %}
         
-                {% if playlist_2 %}
-                <div class="text-center">
-                    <h3 class="text-light">{{ playlist_2.name }}</h3>
-                    <iframe src="https://open.spotify.com/embed/playlist/{{ playlist_2.id }}" width="500" height="500" frameborder="0"></iframe>
-                </div>
-                {% endif %}
         
-            </div>
-        </div>
     </div>
 
     <hr class = "text-light"></hr>
